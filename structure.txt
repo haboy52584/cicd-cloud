@@ -1,0 +1,49 @@
+Terraform: terraform/ directory contains the configuration files for provisioning infrastructure resources.
+main.tf: Contains the resources to be created (VMs, security groups, etc.).
+variables.tf: Contains input variables for customizing the infrastructure.
+outputs.tf: Contains the output values, such as the front-end URL.
+provider.tf: Contains the configuration for the cloud provider.
+Ansible: ansible/ directory includes the playbooks and roles for configuring the VMs and deploying the application.
+playbook.yml: The main Ansible playbook that includes the roles.
+inventory.ini: Contains the dynamic inventory information for the target VMs.
+roles/: Contains role directories for different tasks.
+common/: Role for common tasks to be performed on all VMs.
+frontend/: Role for tasks specific to the front-end VMs.
+backend/: Role for tasks specific to the back-end VMs.
+Chef: chef/ directory contains the cookbooks and configuration for managing the database.
+cookbooks/: Contains the custom cookbooks.
+recipes/: Contains the recipes for the cookbook.
+default.rb: Recipe for setting up and configuring the database.
+database/: Cookbook for managing the database.
+metadata.rb: Metadata for the cookbook.
+README.md: A detailed documentation file containing instructions on how to use the provided code.
+output.txt: output of the run
+├── Overview.txt
+├── README.md
+├── ansible
+│   ├── inventory.ini
+│   ├── playbook.yml
+│   └── roles
+│       ├── backend
+│       │   └── tasks
+│       │       └── main.yml
+│       ├── common
+│       │   └── tasks
+│       │       └── main.yml
+│       └── frontend
+│           └── tasks
+│               └── main.yml
+├── chef
+│   └── cookbooks
+│       ├── database
+│       │   └── metadata.rb
+│       └── recipes
+│           └── default.rb
+├── output.txt
+├── structure
+└── terraform
+    ├── main.tf
+    ├── outputs.tf
+    ├── provider.tf
+    └── variables.tf
+

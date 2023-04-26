@@ -1,0 +1,30 @@
+Overview:
+The proposed solution for this challenge is a two-tier architecture that comprises a front-end web application and a back-end database. The front-end application is hosted on a web server, while the back-end is a relational database. The architecture uses Ansible, Terraform, and Chef to automate the provisioning, management, and destruction of the infrastructure.
+
+1. Infrastructure Provisioning - Terraform:
+Terraform is employed to create and manage the infrastructure resources. The infrastructure-as-code (IAC) approach allows us to define the required resources using Terraform configuration files, which are then executed to provision the resources on the cloud provider (e.g., AWS, Azure, or GCP). The following resources are created using Terraform:
+- Virtual machines (VMs) for front-end and back-end tiers
+- Security groups and network configurations
+- Load balancers for the front-end tier (optional)
+
+2. Configuration Management - Ansible and Chef:
+Ansible and Chef are used to configure the VMs and deploy the application. Ansible playbooks and Chef cookbooks/recipes are employed to automate the installation and configuration of the required software, such as the web server (e.g., Apache or Nginx) and the database (e.g., MySQL or PostgreSQL).
+
+Ansible is used for:
+- Installing prerequisites on the VMs (e.g., updates, essential tools)
+- Installing and configuring the web server on the front-end VMs
+- Deploying the front-end application to the web server
+
+Chef is used for:
+- Installing and configuring the database on the back-end VMs
+- Creating the database schema and tables (if required)
+- Configuring the database connection settings for the front-end application
+
+3. Destruction of Resources - Terraform:
+Terraform is used once again to destroy all the infrastructure resources created earlier. This allows for easy cleanup and ensures that resources are not left unused, thereby reducing costs.
+
+4. Output - Front-end URL/Endpoint:
+Once the infrastructure is provisioned and configured, the front-end URL/endpoint is returned as an output, allowing users to access the sample application.
+
+Solution Documentation:
+The solution includes a README file that contains instructions on how to use the provided code. It includes information on prerequisites, how to execute the Terraform configurations and Ansible playbooks/Chef recipes, and how to destroy the infrastructure when no longer needed. Additionally, all code files are well-commented to ensure easy comprehension and maintainability.

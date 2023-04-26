@@ -1,0 +1,38 @@
+- name: Install Flask and Gunicorn
+  pip:
+    name:
+      - Flask
+      - gunicorn
+    executable: pip3
+
+- name: Create app directory
+  file:
+    path: /var/www/app
+    state: directory
+
+- name: Copy app files
+  copy:
+    src: /path/to/your/flask/app
+    dest: /var/www/app
+
+- name: Start Gunicorn server
+  systemd:
+    name: gunicorn
+    state: started
+    enabled: yes
+    daemon_reload: yes
+    service_path: /etc/systemd/system/gunicorn.service
+    content: |
+      [Unit]
+      Description=Gunicorn daemon
+      After=network.target
+
+      [Service]
+      User=ubuntu
+      Group=www-data
+      WorkingDirectory=/var/www/app
+      ExecStart=/usr/bin/gunicorn3 --bind 0.0.0.0:8000 app:app
+
+      [Install]
+      WantedBy=multi-user.target
+

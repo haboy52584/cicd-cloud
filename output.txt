@@ -1,0 +1,68 @@
+The expected output and results after following the steps to provision, configure, and test the infrastructure are as follows:
+
+1. Terraform output:
+
+   After executing `terraform apply`, Terraform will provision the resources and display the front-end URL as an output. It will look similar to this:
+
+   ```
+   Apply complete! Resources: 6 added, 0 changed, 0 destroyed.
+
+   Outputs:
+
+   frontend_url = "ec2-xx-xx-xx-xx.your-region.compute.amazonaws.com"
+   ```
+
+
+2. Ansible output:
+
+   When running the Ansible playbook, you'll see a summary of the tasks executed on each instance. The output will look like this:
+
+   ```
+   PLAY [frontend] ***************************************************************
+
+   TASK [Gathering Facts] *********************************************************
+   ok: [frontend-instance]
+
+   ...
+
+   PLAY [backend] *****************************************************************
+
+   TASK [Gathering Facts] *********************************************************
+   ok: [backend-instance]
+
+   ...
+
+   PLAY RECAP *********************************************************************
+   backend-instance           : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+   frontend-instance          : ok=8    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+   ```
+
+   This output indicates that all tasks have been executed successfully (no failed tasks).
+
+3. Chef output:
+
+   After applying the Chef cookbook on the back-end instance, you should see output similar to this:
+
+   ```
+   Starting Chef Infra Client, version 17.9.0
+   resolving cookbooks for run list: ["database"]
+   Synchronizing Cookbooks:
+     - database (0.1.0)
+   Installing Cookbook Gems:
+   Compiling Cookbooks...
+   Converging 2 resources
+   Recipe: database::default
+     * apt_package[postgresql] action install (up to date)
+     * service[postgresql] action enable (up to date)
+     * service[postgresql] action start (up to date)
+
+   Running handlers:
+   Running handlers complete
+   Chef Infra Client finished, 0/3 resources updated in 01 seconds
+   ```
+
+   This output shows that the database-related tasks have been executed successfully.
+
+4. Application testing:
+
+   When you access the front-end URL provided by Terraform in your web browser, you should see the sample application's user interface.
